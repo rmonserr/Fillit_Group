@@ -35,6 +35,15 @@ int		ft_connection_check(char *tetramino, int position)
 	return (connections);
 }
 
+int		ft_check_nl(char *tetramino)
+{
+	if (tetramino[4] != '\n' || tetramino[9] != '\n' ||
+		tetramino[14] != '\n' || tetramino[19] != '\n')
+		return (0);
+	else
+		return (1);
+}
+
 int		ft_valid(char *tetramino)
 {
 	int ret;
@@ -45,7 +54,7 @@ int		ft_valid(char *tetramino)
 	position = 0;
 	sharp_counter = 0;
 	connections = 0;
-	if ((ft_strlen(tetramino)) != 20)
+	if ((ft_strlen(tetramino)) != 20 || !(ft_check_nl(tetramino)))
 		return (0);
 	while (tetramino[position])
 	{

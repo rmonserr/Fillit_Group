@@ -12,63 +12,57 @@
 
 #include "fillit.h"
 
-// t_tetris	*ft_newlst(int tetramino, char id)
-// {
-// 	t_tetris	*new;
-
-// 	if (!(new = (t_tetris *)malloc(sizeof(t_tetris))))
-// 		return (NULL);
-// 	new->tetramino = tetramino;
-// 	new->tetramino_ID = id;
-// 	new->next = NULL;
-// 	return (new);
-// }
-
-// t_tetris	*to_list(int *tetramino, char id)
-// {
-// 	t_tetris	*head;
-// 	t_tetris	*tmp;
-
-// 	// if (!head)
-// 	head = ft_newlst(*tetramino, id);
-// 	tmp = head;
-// 	while (tmp->next != NULL)
-// 		tmp = tmp->next;
-// 	tmp = ft_newlst(*tetramino, id);
-// 	return (tmp);
-// }
-
-void	ft_to_numbers(char *str, int nlcounter, char id)
+t_tetris	*new_list()
 {
-	int			num[16];
-	int			num_count;
-	int			str_count;
+	t_tetris *new;
 
-	num_count = 0;
-	str_count = 0;
-	if (ft_valid(str) == 0)
-		return ; // change to exit
-	else
-	{
-		while (str[str_count])
-		{
-			if (str[str_count] != '#' && str[str_count] != '.' &&
-				str[str_count] != '\n')
-				return ; // change to exit
-			if (str[str_count] == '\n')
-				str_count++;
-			if (str[str_count] == '.')
-				num[num_count] = 0;
-			if (str[str_count] == '#')
-				num[num_count] = 1;
-			str_count++;
-			num_count++;
-		}
-	}
-	to_list(num, id);
+	if (!(new = (t_tetris *)malloc(sizeof(t_tetris))))
+		return (NULL);
+	new->next = NULL;
+	return (new);
 }
 
-char	*ft_input(char *buf)
+t_tetris	*to_list(char *str, char id, t_tetris *list)
+{
+	int		pos;
+	int		x;
+	int		y;
+
+	pos = 0;
+	x = 0;
+	y = 0;
+	while (str[pos])
+	{
+		if (str[pos] == '\n')
+			pos++;
+		if (str[pos] == '.')
+			list->tetramino[x][y++] = 0;
+		if (str[pos] == '#')
+			list->tetramino[x][y++] = 1;
+		pos++;
+	}
+	list->tetramino_ID = id;
+	list->next = NULL;
+	return (list);
+}
+
+void	ft_to_coords(char *str, int nlcounter, char id)
+{
+	int				pos;
+	static t_tetris	*head;
+	t_tetris		*tmp;
+
+	if (ft_valid(str) == 0)
+		return ; // change to exit
+	if (!head)
+		head = new_list();
+	tmp = head;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = to_list(str, id, tmp);
+}
+
+void	ft_input(char *buf, int start)
 {
 	char		tet_id;
 	int			nlcounter;
@@ -89,9 +83,9 @@ char	*ft_input(char *buf)
 			tmp++;
 			position++;
 		}
-		ft_to_numbers((str = ft_strsub(buf, 0, position - 1)),
+		ft_to_coords((str = ft_strsub(buf, start, position - 1)),
 			nlcounter, tet_id);
 		tet_id += 1;
+		start += 21;
 	}
-	return (str);
 }

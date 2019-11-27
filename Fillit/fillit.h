@@ -20,13 +20,13 @@
 
 #define BUFF_SIZE 100
 
-char	*ft_input(char *buf);
+void	ft_input(char *buf, int start);
 int		ft_valid(char *tetramin);
 
 typedef struct	s_tetris
 {
 	char			tetramino_ID;
-	int				tetramino;
+	int				tetramino[4][4];
 	struct s_tetris *next;
 }				t_tetris;
 
