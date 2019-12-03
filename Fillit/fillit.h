@@ -20,22 +20,26 @@
 
 #define BUFF_SIZE 100
 
-char	*ft_input(char *buf);
-int		ft_valid(char *tetramin);
+int			ft_valid(char *tetramin);
 
 typedef struct	s_tetris
 {
 	char			tetramino_ID;
-	int				tetramino;
+	int				tetramino[4][4];
 	struct s_tetris *next;
 }				t_tetris;
 
-// typedef	struct	s_field
-// {
-// 	int x;
-// 	int y;
-// 	char **field[][];
-// }				t_fiels;
+void		ft_input(char *buf, int start);
+int			board_size(t_tetris *list);
+t_tetris	*to_zero_coords(t_tetris *list);
+void		ft_solution(t_tetris *head);
+
+typedef	struct	s_field
+{
+	int x;
+	int y;
+	char **field;
+}				t_fiels;
 
 
 

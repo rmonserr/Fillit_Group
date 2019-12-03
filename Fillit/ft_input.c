@@ -34,6 +34,7 @@ t_tetris	*new_list(char *str, char id)
 			new->tetramino[x][y++] = 1;
 		pos++;
 	}
+	to_zero_coords(new);
 	new->tetramino_ID = id;
 	new->next = NULL;
 	return (new);
@@ -56,32 +57,33 @@ void		ft_to_coords(char *str, int nlcounter, char id)
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new_list(str, id);
+	// ft_solution(head);
 }
 
 void		ft_input(char *buf, int start)
 {
-	char		tet_id;
-	int			nlcounter;
-	int			position;
+	char		id;
+	int			nl;
+	int			pos;
 	char		*str;
 	char		*tmp;
 
 	tmp = buf;
-	tet_id = 'A';
+	id = 'A';
 	while (*tmp)
 	{
-		nlcounter = 0;
-		position = 0;
-		while (*tmp && nlcounter != 5)
+		nl = 0;
+		pos = 0;
+		while (*tmp && nl != 5)
 		{
 			if (*tmp == '\n')
-				nlcounter++;
+				nl++;
 			tmp++;
-			position++;
+			pos++;
 		}
-		ft_to_coords((str = ft_strsub(buf, start, position - 1)),
-			nlcounter, tet_id);
-		tet_id += 1;
+		ft_to_coords((str = ft_strsub(buf, start, pos - 1)), nl, id);
+		id += 1;
 		start += 21;
 	}
+	free(str);
 }

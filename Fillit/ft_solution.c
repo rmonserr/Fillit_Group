@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_solution.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmonserr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 16:35:19 by rmonserr          #+#    #+#             */
-/*   Updated: 2019/11/14 16:35:23 by rmonserr         ###   ########.fr       */
+/*   Created: 2019/11/27 14:34:33 by rmonserr          #+#    #+#             */
+/*   Updated: 2019/11/27 14:34:35 by rmonserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
-int		main()
+void	ft_solution(t_tetris *head)
 {
-	char 		buffer[1];
-	char 		*buf;
-	int			file;
-	int			start;
+	t_tetris	*tmp;
+	int			size;
+	static int	elems;
 
-	start = 0;
-	buf = ft_strnew(1);
-	// if (argc == 2)
-	// {
-		file = (open ("tetraminoes.txt", O_RDONLY));
-		while (read(file, buffer, 1))
-			buf = ft_strjoin(buf, buffer);
-		ft_input(buf, start);
-		close(file);
-		free(buf);
-	// }
-	// else
-	// 	write (1, "Error\n", 6);
-	return (0);
+	elems = 0;
+	tmp = head;
+	while (tmp->next != NULL)
+		elems += 1;
+	size = board_size(tmp);
 }
