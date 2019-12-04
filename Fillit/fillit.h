@@ -29,17 +29,17 @@ typedef struct	s_tetris
 	struct s_tetris *next;
 }				t_tetris;
 
-void		ft_input(char *buf, int start);
+void		ft_input(char *buf, int start, t_tetris **head);
 int			board_size(t_tetris *list);
 t_tetris	*to_zero_coords(t_tetris *list);
 void		ft_solution(t_tetris *head);
 
-typedef	struct	s_field
-{
-	int x;
-	int y;
-	char **field;
-}				t_fiels;
+// typedef	struct	s_field
+// {
+// 	int x;
+// 	int y;
+// 	char **field;
+// }				t_fiels;
 
 
 

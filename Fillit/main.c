@@ -13,9 +13,9 @@
 #include "fillit.h"
 #include <stdio.h>
 
-int		main()
+void	ft_fillit(t_tetris **head)
 {
-	char 		buffer[1];
+	char 		buffer[21];
 	char 		*buf;
 	int			file;
 	int			start;
@@ -25,13 +25,21 @@ int		main()
 	// if (argc == 2)
 	// {
 		file = (open ("tetraminoes.txt", O_RDONLY));
-		while (read(file, buffer, 1))
+		while (read(file, buffer, 21))
 			buf = ft_strjoin(buf, buffer);
-		ft_input(buf, start);
+		ft_input(buf, start, head);
+		ft_solution(*head);
 		close(file);
 		free(buf);
 	// }
 	// else
 	// 	write (1, "Error\n", 6);
+}
+
+int		main()
+{
+	static t_tetris	*head;
+
+	ft_fillit(&head);
 	return (0);
 }

@@ -40,27 +40,25 @@ t_tetris	*new_list(char *str, char id)
 	return (new);
 }
 
-void		ft_to_coords(char *str, int nlcounter, char id)
+void	ft_to_coords(char *str, int nlcounter, char id, t_tetris **head)
 {
 	int				pos;
-	static t_tetris	*head;
 	t_tetris		*tmp;
 
 	if (ft_valid(str) == 0)
 		return ; // change to exit
-	if (!head)
+	if (!(*head))
 	{
-		head = new_list(str, id);
+		*head = new_list(str, id);
 		return ;
 	}
-	tmp = head;
+	tmp = *head;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new_list(str, id);
-	// ft_solution(head);
 }
 
-void		ft_input(char *buf, int start)
+void		ft_input(char *buf, int start, t_tetris **head)
 {
 	char		id;
 	int			nl;
@@ -81,9 +79,9 @@ void		ft_input(char *buf, int start)
 			tmp++;
 			pos++;
 		}
-		ft_to_coords((str = ft_strsub(buf, start, pos - 1)), nl, id);
+		ft_to_coords((str = ft_strsub(buf, start, pos - 1)), nl, id, head);
 		id += 1;
 		start += 21;
+		free(str);
 	}
-	free(str);
 }

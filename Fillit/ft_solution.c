@@ -15,12 +15,8 @@
 void	ft_solution(t_tetris *head)
 {
 	t_tetris	*tmp;
-	int			size;
-	static int	elems;
+	int			i;
 
-	elems = 0;
 	tmp = head;
-	while (tmp->next != NULL)
-		elems += 1;
-	size = board_size(tmp);
+	i = board_size(tmp);
 }

@@ -17,7 +17,7 @@ int		ft_lst_count(t_tetris *list)
 	t_tetris	*tmp;
 	int			counter;
 
-	counter = 0;
+	counter = 1;
 	tmp = list;
 	while (tmp->next != NULL)
 	{
