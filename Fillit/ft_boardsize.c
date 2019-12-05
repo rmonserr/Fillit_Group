@@ -36,7 +36,7 @@ int		ft_sqrt(t_tetris *list)
 	i = 1;
 	if (nb > 0)
 	{
-		while (nb != (i * i))
+		while (nb >= (i * i))
 		{
 			if (nb == i)
 				return (0);

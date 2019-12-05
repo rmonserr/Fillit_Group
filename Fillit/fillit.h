@@ -27,6 +27,8 @@ typedef struct	s_tetris
 	char			tetramino_ID;
 	int				tetramino[4][4];
 	struct s_tetris *next;
+	int				x;
+	int				y;
 }				t_tetris;
 
 void		ft_input(char *buf, int start, t_tetris **head);

@@ -90,3 +90,45 @@ int		ft_valid(char *tetramino)
 	else
 		return (0);
 }
+
+oid    ft_sol(t_tetris *head)
+{
+    t_tetris	*tmp;
+    int			size;
+    int         **map;
+    int         x;
+    int         y;
+    int         flag;
+
+    flag = 0;
+    x = -1;
+    y = -1;
+	tmp = head;
+	size = board_size(tmp);
+
+    //create map + bzero
+
+    while (tmp->next != NULL)
+    {
+        while (!(tmp->tetramino[4][4]))  //find x, y
+        {
+            while (++y < 4)
+            {
+                while (++x < 4)
+                {
+                    if (tmp->tetramino[y][x] == 1)
+                    {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag == 1)
+                    break;
+            }
+            // check_for_map
+            // ft_sol
+            // запись на карту
+        }
+        tmp = tmp->next;
+    }
+}
