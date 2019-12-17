@@ -12,86 +12,102 @@
 
 #include "fillit.h"
 
-// int		ft_to_map(t_tetris *head, char map[17][18], int size)
-// {
-// 	t_tetris	*tmp;
-// 	int			x;
-// 	int			y;
+int		ft_check_tetri(char **tetri_map, t_tetris *head, int size)
+{
+	int i;
+	int x;
+	int y;
 
-// 	tmp = head;
-// 	while (tmp->next != NULL)
-// 	{
-// 		x = 0;
-// 		y = 0;
-// 		while (y < size)
-// 		{
-// 			while (x < size)
-// 			{
-// 				if (tmp->tetramino[y][x] == 1 && map[x][y] == '.')
-// 					map[y][x] = tmp->tetramino_ID;
-// 				x++;
-// 			}
-// 			x = 0;
-// 			y++;
-// 		}
-// 		tmp = tmp->next;
-// 		size++;
-// 	}
-// 	return (1);
-// }
+	i = 0;
+	y = 0;
+	while (y < size)
+	{
+		x = 0;
+		while (x < size)
+		{
+			if (head->y[i] < size && head->x[i] < size &&
+				tetri_map[head->y[i]][head->x[i]] == '.')
+			{
+				i++;
+				if (i == 4)
+					return (1);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
 
-char	ft_to_dots(char map[17][18])
+void	ft_change_tetri(t_tetris **head, int x, int y)
+{
+	int		pos_x;
+	int		pos_y;
+	int		counter;
+
+	pos_x = 100;
+	pos_y = 100;
+	counter = 0;
+	while (counter < 4)
+	{
+		if ((*head)->x[counter] < pos_x)
+			pos_x = (*head)->x[counter];
+		if ((*head)->y[counter] < pos_y)
+			pos_y = (*head)->y[counter];
+		counter++;
+	}
+	counter--;
+	while (counter >= 0)
+	{
+		(*head)->x[counter] = (*head)->x[counter] - pos_x + x;
+		(*head)->y[counter] = (*head)->y[counter] - pos_y + y;
+		counter--;
+	}
+}
+
+char	**ft_algo(char **tetri_map, t_tetris *head, int size)
 {
 	int		x;
 	int		y;
+	char	**map;
 
-	x = 0;
+	map = NULL;
 	y = 0;
-	while (y < 17)
+	if (head->next == NULL)
+		return (map);
+	while (y < size)
 	{
-		while (x < 17)
+		x = 0;
+		while (x < size)
 		{
-			map[y][x] = '.';
+			ft_change_tetri(&head, x, y);
+			if (ft_check_tetri(tetri_map, head, size))
+				map = ft_algo(ft_insert_tetri(tetri_map, head, size),
+					head->next, size);
+			if (map)
+				return (map);
+			tetri_map = ft_remove_tetri(tetri_map, head, size);
 			x++;
 		}
-		map[y][17] = '\0';
-		x = 0;
 		y++;
 	}
-	return (map[16][17]);
+	return (NULL);
 }
 
 void	ft_solution(t_tetris *head)
 {
-	char		map[17][18];
+	char		**result;
+	char		**tetri_map;
 	int			size;
-	int			ret;
 
-	size = board_size(head);
-	ft_to_dots(map);
-
-	t_tetris	*tmp;
-	int			x;
-	int			y;
-
-	tmp = head;
-	while (tmp->next != NULL)
+	tetri_map = NULL;
+	size = ft_board_size(head);
+	tetri_map = ft_new_map(tetri_map, size);
+	while (!(result = ft_algo(tetri_map, head, size)))
 	{
-		x = 0;
-		y = 0;
-		while (y < size - 1)
-		{
-			while (x < size - 1)
-			{
-				if (tmp->tetramino[y][x] == 1 && map[y][x] == '.')
-					map[y][x] = tmp->tetramino_ID;
-				x++;
-			}
-			x = 0;
-			y++;
-		}
-		tmp = tmp->next;
 		size++;
+		ft_memdel((void **)tetri_map);
+		tetri_map = ft_new_map(tetri_map, size);
 	}
-	return ;
+	ft_out_map(result);
 }

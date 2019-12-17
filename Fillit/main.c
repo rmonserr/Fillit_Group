@@ -28,6 +28,7 @@ void	ft_fillit(t_tetris **head)
 		while (read(file, buffer, 21))
 			buf = ft_strjoin(buf, buffer);
 		ft_input(buf, start, head);
+		ft_recursion_exit(head);
 		ft_solution(*head);
 		close(file);
 		free(buf);

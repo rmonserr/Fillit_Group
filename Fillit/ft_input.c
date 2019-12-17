@@ -16,37 +16,34 @@ t_tetris	*new_list(char *str, char id)
 {
 	t_tetris	*new;
 	int			pos;
-	int			x;
-	int			y;
+	int			counter;
 
 	pos = 0;
-	x = 0;
-	y = 0;
+	counter = 0;
 	if (!(new = (t_tetris *)malloc(sizeof(t_tetris))))
 		return (0);
 	while (str[pos])
 	{
-		if (str[pos] == '\n')
-			pos++;
-		if (str[pos] == '.')
-			new->tetramino[x][y++] = 0;
 		if (str[pos] == '#')
-			new->tetramino[x][y++] = 1;
+		{
+			new->x[counter] = pos % 5;
+			new->y[counter] = pos / 5;
+			counter++;
+		}
 		pos++;
 	}
-	to_zero_coords(new);
 	new->tetramino_ID = id;
 	new->next = NULL;
 	return (new);
 }
 
-void	ft_to_coords(char *str, int nlcounter, char id, t_tetris **head)
+void		ft_to_coords(char *str, int nlcounter, char id, t_tetris **head)
 {
 	int				pos;
 	t_tetris		*tmp;
 
 	if (ft_valid(str) == 0)
-		return ; // change to exit
+		return ;
 	if (!(*head))
 	{
 		*head = new_list(str, id);

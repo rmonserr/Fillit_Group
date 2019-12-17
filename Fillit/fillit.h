@@ -25,24 +25,19 @@ int			ft_valid(char *tetramin);
 typedef struct	s_tetris
 {
 	char			tetramino_ID;
-	int				tetramino[4][4];
 	struct s_tetris *next;
-	int				x;
-	int				y;
+	int				x[4];
+	int				y[4];
 }				t_tetris;
 
 void		ft_input(char *buf, int start, t_tetris **head);
-int			board_size(t_tetris *list);
-t_tetris	*to_zero_coords(t_tetris *list);
+int			ft_board_size(t_tetris *list);
 void		ft_solution(t_tetris *head);
-
-// typedef	struct	s_field
-// {
-// 	int x;
-// 	int y;
-// 	char **field;
-// }				t_fiels;
-
-
+char		**ft_insert_tetri(char **map, t_tetris *head, int size);
+char		**ft_new_map(char **tetri_map, int size);
+char		**ft_remove_tetri(char **map, t_tetris *head, int size);
+void		ft_out_map(char **result);
+int			ft_lst_count(t_tetris *list);
+void		ft_recursion_exit(t_tetris **head);
 
 #endif
