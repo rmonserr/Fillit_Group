@@ -22,7 +22,7 @@ void	ft_out_map(char **result)
 		ft_putendl("error");
 		return ;
 	}
-	while (result[counter])
+	while (result[counter] != '\0')
 	{
 		ft_putendl(result[counter]);
 		counter++;

@@ -71,10 +71,10 @@ char	**ft_algo(char **tetri_map, t_tetris *head, int size)
 	int		y;
 	char	**map;
 
+	if (head->next == NULL)
+		return (tetri_map);
 	map = NULL;
 	y = 0;
-	if (head->next == NULL)
-		return (map);
 	while (y < size)
 	{
 		x = 0;
@@ -102,6 +102,7 @@ void	ft_solution(t_tetris *head)
 
 	tetri_map = NULL;
 	size = ft_board_size(head);
+	result = NULL;
 	tetri_map = ft_new_map(tetri_map, size);
 	while (!(result = ft_algo(tetri_map, head, size)))
 	{
