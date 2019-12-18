@@ -12,19 +12,22 @@
 
 #include "fillit.h"
 
-void	ft_out_map(char **result)
+void	ft_out_map(char **result, int size)
 {
-	int		counter;
+	int	x;
+	int y;
 
-	counter = 0;
-	if (!result)
+	y = 0;
+	while (y < size)
 	{
-		ft_putendl("error");
-		return ;
+		x = 0;
+		while (x < size)
+		{
+			ft_putchar(result[y][x]);
+			x++;
+		}
+		ft_putchar('\n');
+		y++;
 	}
-	while (result[counter] != '\0')
-	{
-		ft_putendl(result[counter]);
-		counter++;
-	}
+	ft_putchar('\n');
 }
