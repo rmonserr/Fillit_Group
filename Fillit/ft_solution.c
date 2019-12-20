@@ -101,7 +101,7 @@ void	ft_solution(t_tetris *head)
 	int			size;
 
 	tetri_map = NULL;
-	size = ft_board_size(head);
+	size = 2;
 	result = NULL;
 	tetri_map = ft_new_map(tetri_map, size);
 	while (!(result = ft_algo(tetri_map, head, size)))

@@ -13,16 +13,16 @@
 #include "fillit.h"
 #include <stdio.h>
 
-t_tetris	*new_node()
-{
-	t_tetris *new;
+// t_tetris	*new_node()
+// {
+// 	t_tetris *new;
 
-	if (!(new = (t_tetris *)malloc(sizeof(t_tetris))))
-		return (NULL);
-	new->next = NULL;
-	new->tetramino_id = 0;
-	return (new);
-}
+// 	if (!(new = (t_tetris *)malloc(sizeof(t_tetris))))
+// 		return (NULL);
+// 	new->next = NULL;
+// 	new->tetramino_id = 0;
+// 	return (new);
+// }
 
 void		ft_fillit(t_tetris **head)
 {
@@ -55,9 +55,9 @@ void		ft_fillit(t_tetris **head)
 
 int		main()
 {
-	t_tetris *head;
+	static t_tetris *head;
 
-	head = new_node();
+	// head = new_node();
 	ft_fillit(&head);
 	return (0);
 }

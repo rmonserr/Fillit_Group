@@ -18,12 +18,17 @@ char	**ft_new_map(char **tetri_map, int size)
 	int	y;
 
 	y = 0;
-	if (!(tetri_map = (char **)malloc(sizeof(char *) * size - 1)))
+	if (size <= 0)
+	{
+		write (1, "Error\n", 6);
+		exit(1);
+	}
+	if (!(tetri_map = (char **)malloc(sizeof(char *) * size + 15)))
 		return (NULL);
 	while (y < size)
 	{
 
-		if (!(tetri_map[y] = (char *)malloc(sizeof(char ) * size - 1)))
+		if (!(tetri_map[y] = (char *)malloc(sizeof(char ) * size + 1)))
 			return (NULL);
 		x = 0;
 		while (x < size)

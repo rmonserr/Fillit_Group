@@ -46,7 +46,7 @@ void		ft_to_coords(char *str, char id, t_tetris **head)
 		write(1, "Error\n", 6);
 		exit(1);
 	}
-	if ((*head)->next == NULL && (*head)->tetramino_id == 0)
+	if (!(*head))
 	{
 		*head = new_list(str, id);
 		return ;
