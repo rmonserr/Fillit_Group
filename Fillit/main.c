@@ -33,7 +33,7 @@ void		ft_fillit(t_tetris **head)
 	char		*tmp;
 
 	start = 0;
-	buf = ft_strnew(1);
+ 	buf = ft_strnew(0);
 	// if (argc == 2)
 	// {
 		file = (open ("tetraminoes.txt", O_RDONLY));

@@ -108,7 +108,7 @@ void	ft_solution(t_tetris *head)
 	{
 		size++;
 		ft_memdel((void **)tetri_map);
-		tetri_map = ft_new_map(tetri_map, size);
+		tetri_map = ft_new_map(tetri_map, size); // alloc mem
 	}
 	ft_out_map(result, size);
 }

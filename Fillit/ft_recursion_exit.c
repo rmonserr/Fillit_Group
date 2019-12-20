@@ -21,7 +21,7 @@ void		ft_recursion_exit(t_tetris **head)
 	tmp = *head;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
-	if (!(tmp->next = (t_tetris *)malloc(sizeof(t_tetris))))
+	if (!(tmp->next = (t_tetris *)malloc(sizeof(t_tetris)))) //allocate mem
 		return ;
 	tmp = tmp->next;
 	while (counter < 4)

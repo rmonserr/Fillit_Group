@@ -20,8 +20,10 @@ t_tetris	*new_list(char *str, char id)
 
 	pos = 0;
 	counter = 0;
-	if (!(new = (t_tetris *)malloc(sizeof(t_tetris))))
-		return (0);
+	if (!str || !id)
+		return (NULL);
+	if (!(new = (t_tetris *)malloc(sizeof(t_tetris)))) //allocate mem
+		return (NULL);
 	while (str[pos])
 	{
 		if (str[pos] == '#')
@@ -67,7 +69,6 @@ void		ft_input(char *buf, int start, t_tetris **head)
 
 	tmp = buf;
 	id = 'A';
-	str = NULL;
 	while (*tmp)
 	{
 		nl = 0;
@@ -79,7 +80,7 @@ void		ft_input(char *buf, int start, t_tetris **head)
 			tmp++;
 			pos++;
 		}
-		ft_to_coords((str = ft_strsub(buf, start, pos - 1)), id, head);
+		ft_to_coords((str = ft_strsub(buf, start, pos - 1)), id, head); //allocaate mem
 		id += 1;
 		start += 21;
 		ft_strdel(&str);
