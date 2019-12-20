@@ -14,13 +14,11 @@
 
 int		ft_connection_check(char *tetramino, int position)
 {
-	int		counter;
 	int		connections;
 	int		pos;
 
 	connections = 0;
 	pos = position;
-	counter = 0;
 	if (tetramino[++pos] == '#')
 		connections++;
 	pos = position;

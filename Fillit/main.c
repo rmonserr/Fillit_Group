@@ -13,12 +13,24 @@
 #include "fillit.h"
 #include <stdio.h>
 
-void	ft_fillit(t_tetris **head)
+t_tetris	*new_node()
+{
+	t_tetris *new;
+
+	if (!(new = (t_tetris *)malloc(sizeof(t_tetris))))
+		return (NULL);
+	new->next = NULL;
+	new->tetramino_id = 0;
+	return (new);
+}
+
+void		ft_fillit(t_tetris **head)
 {
 	char 		buffer[21];
 	char 		*buf;
 	int			file;
 	int			start;
+	char		*tmp;
 
 	start = 0;
 	buf = ft_strnew(1);
@@ -26,12 +38,16 @@ void	ft_fillit(t_tetris **head)
 	// {
 		file = (open ("tetraminoes.txt", O_RDONLY));
 		while (read(file, buffer, 21))
-			buf = ft_strjoin(buf, buffer);
+		{
+			tmp = buf;
+			buf = ft_strjoin(tmp, buffer);
+			ft_strdel(&tmp);
+		}
 		ft_input(buf, start, head);
 		ft_recursion_exit(head);
 		ft_solution(*head);
 		close(file);
-		free(buf);
+		ft_strdel(&buf);
 	// }
 	// else
 	// 	write (1, "Error\n", 6);
@@ -39,8 +55,9 @@ void	ft_fillit(t_tetris **head)
 
 int		main()
 {
-	static t_tetris	*head;
+	t_tetris *head;
 
+	head = new_node();
 	ft_fillit(&head);
 	return (0);
 }

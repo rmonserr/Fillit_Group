@@ -48,7 +48,7 @@ char	**ft_remove_tetri(char **map, t_tetris *head, int size)
 		x = 0;
 		while (x < size)
 		{
-			if (map[y][x] == head->tetramino_ID)
+			if (map[y][x] == head->tetramino_id)
 				map[y][x] = '.';
 			x++;
 		}
@@ -72,7 +72,7 @@ char	**ft_insert_tetri(char **map, t_tetris *head, int size)
 		{
 			if (head->y[counter] == y && head->x[counter] == x)
 			{
-				map[y][x] = head->tetramino_ID;
+				map[y][x] = head->tetramino_id;
 				counter++;
 			}
 			x++;

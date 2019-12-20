@@ -30,4 +30,5 @@ void	ft_out_map(char **result, int size)
 		y++;
 	}
 	ft_putchar('\n');
+	ft_memdel((void **)result);
 }

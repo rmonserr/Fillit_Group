@@ -32,19 +32,21 @@ t_tetris	*new_list(char *str, char id)
 		}
 		pos++;
 	}
-	new->tetramino_ID = id;
+	new->tetramino_id = id;
 	new->next = NULL;
 	return (new);
 }
 
-void		ft_to_coords(char *str, int nlcounter, char id, t_tetris **head)
+void		ft_to_coords(char *str, char id, t_tetris **head)
 {
-	int				pos;
 	t_tetris		*tmp;
 
 	if (ft_valid(str) == 0)
-		return ;
-	if (!(*head))
+	{
+		write(1, "Error\n", 6);
+		exit(1);
+	}
+	if ((*head)->next == NULL && (*head)->tetramino_id == 0)
 	{
 		*head = new_list(str, id);
 		return ;
@@ -65,6 +67,7 @@ void		ft_input(char *buf, int start, t_tetris **head)
 
 	tmp = buf;
 	id = 'A';
+	str = NULL;
 	while (*tmp)
 	{
 		nl = 0;
@@ -76,9 +79,9 @@ void		ft_input(char *buf, int start, t_tetris **head)
 			tmp++;
 			pos++;
 		}
-		ft_to_coords((str = ft_strsub(buf, start, pos - 1)), nl, id, head);
+		ft_to_coords((str = ft_strsub(buf, start, pos - 1)), id, head);
 		id += 1;
 		start += 21;
-		free(str);
+		ft_strdel(&str);
 	}
 }

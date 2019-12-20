@@ -24,7 +24,7 @@ int			ft_valid(char *tetramin);
 
 typedef struct	s_tetris
 {
-	char			tetramino_ID;
+	char			tetramino_id;
 	struct s_tetris *next;
 	int				x[4];
 	int				y[4];
@@ -38,6 +38,7 @@ char		**ft_new_map(char **tetri_map, int size);
 char		**ft_remove_tetri(char **map, t_tetris *head, int size);
 void		ft_out_map(char **result, int size);
 int			ft_lst_count(t_tetris *list);
+void		ft_recursion_exit(t_tetris **head);
 void		ft_recursion_exit(t_tetris **head);
 
 #endif

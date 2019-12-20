@@ -24,7 +24,7 @@ int		ft_lst_count(t_tetris *list)
 		tmp = tmp->next;
 		counter++;
 	}
-	return (counter);
+	return (counter - 1);
 }
 
 int		ft_sqrt(t_tetris *list)
