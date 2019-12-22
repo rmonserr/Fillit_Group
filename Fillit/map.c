@@ -42,7 +42,7 @@ char	**ft_new_map(char **tetri_map, int size)
 	return (tetri_map);
 }
 
-char	**ft_remove_tetri(char **map, t_tetris *head, int size)
+char	**ft_remove_tetri(char **map, t_tetris *tet, int size, int index)
 {
 	int x;
 	int y;
@@ -53,7 +53,7 @@ char	**ft_remove_tetri(char **map, t_tetris *head, int size)
 		x = 0;
 		while (x < size)
 		{
-			if (map[y][x] == head->tetramino_id)
+			if (map[y][x] == tet[index].tetramino_id)
 				map[y][x] = '.';
 			x++;
 		}
@@ -62,7 +62,7 @@ char	**ft_remove_tetri(char **map, t_tetris *head, int size)
 	return (map);
 }
 
-char	**ft_insert_tetri(char **map, t_tetris *head, int size)
+char	**ft_insert_tetri(char **map, t_tetris *tet, int size, int index)
 {
 	int x;
 	int y;
@@ -75,9 +75,9 @@ char	**ft_insert_tetri(char **map, t_tetris *head, int size)
 		x = 0;
 		while (x < size)
 		{
-			if (head->y[counter] == y && head->x[counter] == x)
+			if (tet[index].y[counter] == y && tet[index].x[counter] == x)
 			{
-				map[y][x] = head->tetramino_id;
+				map[y][x] = tet[index].tetramino_id;
 				counter++;
 			}
 			x++;

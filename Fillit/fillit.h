@@ -25,20 +25,22 @@ int			ft_valid(char *tetramin);
 typedef struct	s_tetris
 {
 	char			tetramino_id;
-	struct s_tetris *next;
 	int				x[4];
 	int				y[4];
 }				t_tetris;
 
-void		ft_input(char *buf, int start, t_tetris **head);
-int			ft_board_size(t_tetris *list);
-void		ft_solution(t_tetris *head);
-char		**ft_insert_tetri(char **map, t_tetris *head, int size);
+void		ft_input(char *buf, int start, t_tetris *tetraminoes);
+int			ft_board_size(t_tetris *tetraminoes);
+void		ft_solution(t_tetris *tetraminoes);
+char		**ft_insert_tetri(char **map, t_tetris *tet, int size, int index);
 char		**ft_new_map(char **tetri_map, int size);
-char		**ft_remove_tetri(char **map, t_tetris *head, int size);
+char		**ft_remove_tetri(char **map, t_tetris *tetraminoes, int size, int index);
 void		ft_out_map(char **result, int size);
-int			ft_lst_count(t_tetris *list);
+int			ft_count_tetraminoes(t_tetris *list);
 void		ft_recursion_exit(t_tetris **head);
 void		ft_recursion_exit(t_tetris **head);
+void		ft_set_zero(t_tetris *tetraminoes);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t		ft_strlen(const char *s);
 
 #endif

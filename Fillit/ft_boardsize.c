@@ -12,27 +12,22 @@
 
 #include "fillit.h"
 
-int		ft_lst_count(t_tetris *list)
+int		ft_count_tetraminoes(t_tetris *tetramines)
 {
-	t_tetris	*tmp;
-	int			counter;
+	int			index;
 
-	counter = 1;
-	tmp = list;
-	while (tmp->next != NULL)
-	{
-		tmp = tmp->next;
-		counter++;
-	}
-	return (counter - 1);
+	index = 0;
+	while (tetramines[index].tetramino_id != '0')
+		index++;
+	return (index);
 }
 
-int		ft_sqrt(t_tetris *list)
+int		ft_sqrt(t_tetris *tetraminoes)
 {
 	int nb;
 	int i;
 
-	nb = (ft_lst_count(list) - 1) * 4;
+	nb = (ft_count_tetraminoes(tetraminoes) * 4);
 	i = 1;
 	if (nb > 0)
 	{
@@ -48,10 +43,10 @@ int		ft_sqrt(t_tetris *list)
 		return (0);
 }
 
-int		ft_board_size(t_tetris *list)
+int		ft_board_size(t_tetris *tetraminoes)
 {
 	int		board_size;
 
-	board_size = ft_sqrt(list);
+	board_size = ft_sqrt(tetraminoes);
 	return (board_size);
 }

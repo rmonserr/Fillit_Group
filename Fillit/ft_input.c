@@ -12,54 +12,42 @@
 
 #include "fillit.h"
 
-t_tetris	*new_list(char *str, char id)
+void	coords(t_tetris *tetraminoes, char *str, char id, int index)
 {
-	t_tetris	*new;
 	int			pos;
 	int			counter;
 
 	pos = 0;
 	counter = 0;
-	if (!str || !id)
-		return (NULL);
-	if (!(new = (t_tetris *)malloc(sizeof(t_tetris)))) //allocate mem
-		return (NULL);
 	while (str[pos])
 	{
 		if (str[pos] == '#')
 		{
-			new->x[counter] = pos % 5;
-			new->y[counter] = pos / 5;
+			tetraminoes[index].x[counter] = pos % 5;
+			tetraminoes[index].y[counter] = pos / 5;
 			counter++;
 		}
 		pos++;
 	}
-	new->tetramino_id = id;
-	new->next = NULL;
-	return (new);
+	tetraminoes[index].tetramino_id = id;
 }
 
-void		ft_to_coords(char *str, char id, t_tetris **head)
+void		ft_to_coords(char *str, char id, t_tetris *tetraminoes)
 {
-	t_tetris		*tmp;
+	int		index;
 
+	index = 0;
 	if (ft_valid(str) == 0)
 	{
 		write(1, "Error\n", 6);
 		exit(1);
 	}
-	if (!(*head))
-	{
-		*head = new_list(str, id);
-		return ;
-	}
-	tmp = *head;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = new_list(str, id);
+	while (tetraminoes[index].tetramino_id != '0')
+		index++;
+	coords(tetraminoes, str, id, index);
 }
 
-void		ft_input(char *buf, int start, t_tetris **head)
+void		ft_input(char *buf, int start, t_tetris *tetraminoes)
 {
 	char		id;
 	int			nl;
@@ -80,7 +68,7 @@ void		ft_input(char *buf, int start, t_tetris **head)
 			tmp++;
 			pos++;
 		}
-		ft_to_coords((str = ft_strsub(buf, start, pos - 1)), id, head); //allocaate mem
+		ft_to_coords((str = ft_strsub(buf, start, pos - 1)), id, tetraminoes);
 		id += 1;
 		start += 21;
 		ft_strdel(&str);
