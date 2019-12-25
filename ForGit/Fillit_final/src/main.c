@@ -15,7 +15,7 @@
 
 void		ft_fillit(t_tetris *tetraminoes, char **argv)
 {
-	char 		buffer[1000000];
+	char 		buffer[1000000] = {0};
 	char 		*buf;
 	int			file;
 	char		*tmp;
@@ -43,7 +43,7 @@ int		main(int argc, char **argv)
 		ft_fillit(tetraminoes, argv);
 	else
 	{
-		write (1, "Usage: ./Fillit [tetraminoes]\n", 30);
+		write (1, "Usage: ./Fillit [tetraminoes]\n", 31);
 		exit(1);
 	}
 	return (0);

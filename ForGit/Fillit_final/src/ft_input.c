@@ -113,5 +113,6 @@ void	ft_input(char *buf, t_tetris *tetraminoes)
 		id += 1;
 		tet--;
 		start += 21;
+		free(str);
 	}
 }

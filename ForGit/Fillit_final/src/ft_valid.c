@@ -19,24 +19,28 @@ int		ft_connection_check(char *tetramino, int position)
 
 	connections = 0;
 	pos = position;
-	if (tetramino[++pos] == '#')
+	if (pos <= 18 && tetramino[++pos] == '#')
 		connections++;
 	pos = position;
-	if (tetramino[pos + 5] == '#')
+	if (pos <= 13 && tetramino[pos + 5] == '#')
 		connections++;
 	pos = position;
-	if (tetramino[--pos] == '#')
+	if (pos >= 1 && tetramino[--pos] == '#')
 		connections++;
 	pos = position;
-	if (tetramino[position - 5] == '#')
+	if (pos > 4 && tetramino[position - 5] == '#')
 		connections++;
 	return (connections);
 }
 
 int		ft_check_nl(char *tetramino)
 {
-	if (tetramino[4] == '\n' || tetramino[9] == '\n' ||
-		tetramino[14] == '\n' || tetramino[19] == '\n')
+	if (((tetramino[4] == '\n' && tetramino[9] == '\n' &&
+		tetramino[14] == '\n' && tetramino[19] == '\n')) &&
+		((tetramino[4 - 1] != '\n' && tetramino[9 - 1] != '\n' &&
+		tetramino[14 - 1] != '\n' && tetramino[19 - 1] != '\n'))
+		&& (((tetramino[4 + 1] != '\n' && tetramino[9 + 1] != '\n' &&
+		tetramino[14 + 1] != '\n'))))
 		return (1);
 	else
 		return (0);
