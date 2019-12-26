@@ -11,12 +11,11 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 char		*ft_my_read(int fd)
 {
 	size_t		read_result;
-	char 		buf[BUFF_SIZE + 1];
+	char		buf[BUFF_SIZE + 1];
 	char		*str;
 	char		*tmp;
 
@@ -28,7 +27,7 @@ char		*ft_my_read(int fd)
 		tmp = str;
 		if (!(str = ft_strjoin(tmp, buf)))
 		{
-			write (1, "error\n", 6);
+			write(1, "error\n", 6);
 			exit(1);
 		}
 		ft_strdel(&tmp);
@@ -41,9 +40,8 @@ void		ft_fillit(t_tetris *tetraminoes, char **argv)
 	int			fd;
 	char		*buf;
 
-
- 	fd = (open (argv[1], O_RDONLY));
- 	buf = ft_my_read(fd);
+	fd = (open(argv[1], O_RDONLY));
+	buf = ft_my_read(fd);
 	ft_set_zero(tetraminoes);
 	ft_input(buf, tetraminoes);
 	ft_solution(tetraminoes);
@@ -51,7 +49,7 @@ void		ft_fillit(t_tetris *tetraminoes, char **argv)
 	ft_strdel(&buf);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_tetris tetraminoes[27];
 
@@ -59,7 +57,7 @@ int		main(int argc, char **argv)
 		ft_fillit(tetraminoes, argv);
 	else
 	{
-		write (1, "Usage: ./Fillit [tetraminoes]\n", 31);
+		write(1, "Usage: ./Fillit [tetraminoes]\n", 31);
 		exit(1);
 	}
 	return (0);

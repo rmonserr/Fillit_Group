@@ -16,6 +16,8 @@ SRC		= ./src/main.c  \
 		  ./src/ft_strnew.c\
 		  ./src/ft_strsub.c \
 		  ./src/ft_memset.c \
+		  ./src/ft_memalloc.c \
+		  ./src/ft_free_map.c \
 
 
 

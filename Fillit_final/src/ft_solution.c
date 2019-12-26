@@ -108,8 +108,8 @@ void	ft_solution(t_tetris *tetraminoes)
 	tetri_map = ft_new_map(tetri_map, size);
 	while (!(result = ft_algo(tetri_map, tetraminoes, size, index)))
 	{
+		ft_clear_map(tetri_map, size);
 		size++;
-		ft_memdel((void **)tetri_map);
 		tetri_map = ft_new_map(tetri_map, size);
 	}
 	ft_out_map(result, size);

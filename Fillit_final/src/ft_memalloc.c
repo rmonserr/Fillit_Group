@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   output.c                                           :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmonserr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/17 17:30:52 by rmonserr          #+#    #+#             */
-/*   Updated: 2019/12/17 17:30:54 by rmonserr         ###   ########.fr       */
+/*   Created: 2019/09/17 14:10:27 by rmonserr          #+#    #+#             */
+/*   Updated: 2019/09/17 14:11:45 by rmonserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
+#include <string.h>
+#include <stdlib.h>
 
-void	ft_out_map(char **result, int size)
+void	*ft_memalloc(size_t size)
 {
-	int	x;
-	int y;
+	void *tmp;
 
-	y = 0;
-	while (y < size)
-	{
-		x = 0;
-		while (x < size)
-		{
-			ft_putchar(result[y][x]);
-			x++;
-		}
-		ft_putchar('\n');
-		y++;
-	}
-	ft_putchar('\n');
-	ft_clear_map(result, size);
+	tmp = malloc(size);
+	if (tmp == NULL)
+		return (NULL);
+	ft_memset(tmp, 0, size);
+	return (tmp);
 }

@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   output.c                                           :+:      :+:    :+:   */
+/*   ft_free_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmonserr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/17 17:30:52 by rmonserr          #+#    #+#             */
-/*   Updated: 2019/12/17 17:30:54 by rmonserr         ###   ########.fr       */
+/*   Created: 2019/12/26 17:18:46 by rmonserr          #+#    #+#             */
+/*   Updated: 2019/12/26 17:18:48 by rmonserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	ft_out_map(char **result, int size)
+void	ft_clear_map(char **tetri_map, int size)
 {
-	int	x;
-	int y;
+	int i;
 
-	y = 0;
-	while (y < size)
-	{
-		x = 0;
-		while (x < size)
-		{
-			ft_putchar(result[y][x]);
-			x++;
-		}
-		ft_putchar('\n');
-		y++;
-	}
-	ft_putchar('\n');
-	ft_clear_map(result, size);
+	i = -1;
+	while (++i < size)
+		ft_memdel((void **)&tetri_map[i]);
+	ft_memdel((void **)&tetri_map);
 }
