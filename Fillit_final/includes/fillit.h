@@ -29,7 +29,7 @@ typedef struct	s_tetris
 	int				y[4];
 }				t_tetris;
 
-void		ft_input(char *buf, int start, t_tetris *tetraminoes);
+void		ft_input(char *buf, t_tetris *tetraminoes);
 int			ft_board_size(t_tetris *tetraminoes);
 void		ft_solution(t_tetris *tetraminoes);
 char		**ft_insert_tetri(char **map, t_tetris *tet, int size, int index);

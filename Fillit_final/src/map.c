@@ -20,7 +20,7 @@ char	**ft_new_map(char **tetri_map, int size)
 	y = 0;
 	if (size <= 0)
 	{
-		write (1, "Error\n", 6);
+		write (1, "error\n", 6);
 		exit(1);
 	}
 	if (!(tetri_map = (char **)malloc(sizeof(char *) * size + 1)))

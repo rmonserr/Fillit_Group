@@ -12,6 +12,49 @@
 
 #include "fillit.h"
 
+int		count_tet(char *buf)
+{
+	int count;
+	int result;
+
+	count = 0;
+	result = 0;
+	while (buf[count])
+	{
+		if (buf[count] == '#')
+			result++;
+		count++;
+	}
+	return (result / 4);
+}
+
+int		check_valid_str(char *buf)
+{
+	int dot;
+	int sharp;
+	int ret;
+	int index;
+
+	dot = 0;
+	sharp = 0;
+	ret = ft_strlen(buf);
+	index = 0;
+	if ((ret + 1) % 21 == 0)
+	{
+		while (buf[index])
+		{
+			if (buf[index] == '.')
+				dot++;
+			if (buf[index] == '#')
+				sharp++;
+			index++;
+		}
+		if (dot % 12 == 0 && sharp % 4 == 0)
+			return (1);
+	}
+	return (0);
+}
+
 void	coords(t_tetris *tetraminoes, char *str, char id, int index)
 {
 	int			pos;
@@ -32,7 +75,7 @@ void	coords(t_tetris *tetraminoes, char *str, char id, int index)
 	tetraminoes[index].tetramino_id = id;
 }
 
-void		ft_to_coords(char *str, char id, t_tetris *tetraminoes)
+void	ft_to_coords(char *str, char id, t_tetris *tetraminoes)
 {
 	int		index;
 
@@ -47,30 +90,29 @@ void		ft_to_coords(char *str, char id, t_tetris *tetraminoes)
 	coords(tetraminoes, str, id, index);
 }
 
-void		ft_input(char *buf, int start, t_tetris *tetraminoes)
+void	ft_input(char *buf, t_tetris *tetraminoes)
 {
-	char		id;
-	int			nl;
-	int			pos;
-	char		*str;
-	char		*tmp;
+	int		index;
+	char	id;
+	char	*str;
+	int		tet;
+	int		start;
 
-	tmp = buf;
+	index = 0;
 	id = 'A';
-	while (*tmp)
+	start = 0;
+	if (!(check_valid_str(buf)))
 	{
-		nl = 0;
-		pos = 0;
-		while (*tmp && nl != 5)
-		{
-			if (*tmp == '\n')
-				nl++;
-			tmp++;
-			pos++;
-		}
-		ft_to_coords((str = ft_strsub(buf, start, pos - 1)), id, tetraminoes);
+		write(1, "error\n", 6);
+		exit(1);
+	}
+	tet = count_tet(buf);
+	while (tet > 0)
+	{
+		ft_to_coords((str = ft_strsub(buf, 0 + start, 20)), id, tetraminoes);
 		id += 1;
+		tet--;
 		start += 21;
-		ft_strdel(&str);
+		free(str);
 	}
 }

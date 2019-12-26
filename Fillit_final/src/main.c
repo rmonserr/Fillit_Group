@@ -13,27 +13,41 @@
 #include "fillit.h"
 #include <stdio.h>
 
-void		ft_fillit(t_tetris *tetraminoes, char **argv)
+char		*ft_my_read(int fd)
 {
-	char 		buffer[21];
-	char 		*buf;
-	int			file;
-	int			start;
+	size_t		read_result;
+	char 		buf[BUFF_SIZE + 1];
+	char		*str;
 	char		*tmp;
 
-	start = 0;
- 	buf = ft_strnew(0);
-	file = (open (argv[1], O_RDONLY));
-		while (read(file, buffer, 21))
+	str = ft_strnew(0);
+	read_result = 1;
+	while ((read_result = read(fd, buf, BUFF_SIZE != 0)))
+	{
+		buf[read_result] = '\0';
+		tmp = str;
+		if (!(str = ft_strjoin(tmp, buf)))
 		{
-			tmp = buf;
-			buf = ft_strjoin(tmp, buffer);
-			ft_strdel(&tmp);
+			write (1, "error\n", 6);
+			exit(1);
 		}
+		ft_strdel(&tmp);
+	}
+	return (str);
+}
+
+void		ft_fillit(t_tetris *tetraminoes, char **argv)
+{
+	int			fd;
+	char		*buf;
+
+
+ 	fd = (open (argv[1], O_RDONLY));
+ 	buf = ft_my_read(fd);
 	ft_set_zero(tetraminoes);
-	ft_input(buf, start, tetraminoes);
+	ft_input(buf, tetraminoes);
 	ft_solution(tetraminoes);
-	close(file);
+	close(fd);
 	ft_strdel(&buf);
 }
 
@@ -45,7 +59,7 @@ int		main(int argc, char **argv)
 		ft_fillit(tetraminoes, argv);
 	else
 	{
-		write (1, "Usage ./Fillit [tetraminoes]\n", 30);
+		write (1, "Usage: ./Fillit [tetraminoes]\n", 31);
 		exit(1);
 	}
 	return (0);
